@@ -15,10 +15,11 @@ public class DiscVertexShaper : MonoBehaviour
     float anglePerPoly;
     Mesh m;
     Vector3 prevData;
-    public DiscVertexShaper(float _rotation)
+    public DiscVertexShaper(float _rotation,float _gap)
     {
         initialAngle = _rotation;
         currentAngle = initialAngle;
+        totalAngle = 360 - _gap;
     }
     void Start()
     {
@@ -89,8 +90,7 @@ public class DiscVertexShaper : MonoBehaviour
         temp = new int[(detail*3)*2+(4*3)];
         for(int i = 0; i <= detail; i++)
         {
-            print(pIndex);
-            print(vIndex);
+           
             if (i > 0)
             {
                 temp[pIndex] = vIndex - 1+1;

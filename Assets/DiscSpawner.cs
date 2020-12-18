@@ -10,6 +10,7 @@ public class DiscSpawner : MonoBehaviour
     {
         currentLevel = _level;
         ClearStage();
+        GenerateStage();
     }
     void ClearStage()
     {
@@ -20,5 +21,9 @@ public class DiscSpawner : MonoBehaviour
                 Destroy(g);
             }
         }
+    }
+    void GenerateStage()
+    {
+
     }
 }

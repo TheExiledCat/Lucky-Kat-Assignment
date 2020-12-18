@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class LevelData : MonoBehaviour//hold the data for a all the discs in a level
+[System.Serializable]
+public class LevelData //hold the data for a all the discs in a level
 {
-    List<Disc> discArray;
-    Color color;
+    public List<Disc> discArray;
+    public Color color;
     public LevelData(List<Disc> _newDiscs,Color _c)
     {
         SetDiscs(_newDiscs);
         SetColor(_c);
     }
-    #region discs
+    #region discs   
     public List<Disc> GetDiscs()
     {
         return discArray;

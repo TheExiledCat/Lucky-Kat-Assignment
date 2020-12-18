@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Disc : MonoBehaviour
+[System.Serializable]
+public class Disc 
 {
-    float startRotation;
-    int amountOfSplits;
-    float gap;
+    public float startRotation;
+    public int amountOfSplits;
+    public float gap;
     public Disc(float _rot,int _splits,float _gap = ConstantValues.GAP)
     {
         startRotation = _rot;
