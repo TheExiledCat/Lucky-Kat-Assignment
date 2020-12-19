@@ -15,7 +15,7 @@ public class DiscVertexShaper : MonoBehaviour
     float initialAngle;
     float currentAngle;
     float anglePerPoly; 
-    float thickness=3;
+    float thickness=ConstantValues.DISC_THICKNESS;
     Mesh m;
     Vector3 prevData;
     
@@ -27,6 +27,13 @@ public class DiscVertexShaper : MonoBehaviour
         thickness = _thickness;
         length = _radius;
         detail = _polyCount;
+        
+        //create mesh data
+        m = new Mesh();
+        GetComponent<MeshFilter>().mesh = m;
+        //Generate Mesh
+        StartGen();
+        UpdateMesh();
     }
     void Start()
     {
@@ -34,14 +41,9 @@ public class DiscVertexShaper : MonoBehaviour
         {
             thickness = ConstantValues.DISC_THICKNESS;
         }
-        //create mesh data
-         m = new Mesh();
-        GetComponent<MeshFilter>().mesh = m;
         
-        //start mesh generation
-        StartGen();
+         
         
-        UpdateMesh();
     }
     void StartGen()//creates the disc
     {

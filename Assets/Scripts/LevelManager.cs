@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour//holds the data of the levels, im maki
     {
         #region level 1
         ds = GetComponent<DiscSpawner>();
-        levels.Add(new LevelData(new List<Disc>(20), Color.black));
+        levels.Add(new LevelData(new List<Disc>(20), Color.gray));
         for (int i = 0; i < 3; i++)
         {
             Disc discToAdd = new Disc(UnityEngine.Random.Range(0, 360), 1);

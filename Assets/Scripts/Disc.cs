@@ -13,4 +13,5 @@ public class Disc
         amountOfSplits = _splits;
         gap = _gap;
     }
+    
 }
