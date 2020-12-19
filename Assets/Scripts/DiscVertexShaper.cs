@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(DiscRender))]
 public class DiscVertexShaper : MonoBehaviour
 {
     Vector3[] vertices;
@@ -12,17 +14,26 @@ public class DiscVertexShaper : MonoBehaviour
     [SerializeField] float totalAngle = 360;
     float initialAngle;
     float currentAngle;
-    float anglePerPoly;
+    float anglePerPoly; 
+    float thickness=3;
     Mesh m;
     Vector3 prevData;
-    public DiscVertexShaper(float _rotation,float _gap)
+    
+    public void Initialize(float _rotation,float _gap, float _thickness = ConstantValues.DISC_THICKNESS,float _radius = ConstantValues.DISC_RADIUS,int _polyCount= ConstantValues.DISC_POLY_COUNT)
     {
         initialAngle = _rotation;
         currentAngle = initialAngle;
         totalAngle = 360 - _gap;
+        thickness = _thickness;
+        length = _radius;
+        detail = _polyCount;
     }
     void Start()
     {
+        if (thickness <= 0)
+        {
+            thickness = ConstantValues.DISC_THICKNESS;
+        }
         //create mesh data
          m = new Mesh();
         GetComponent<MeshFilter>().mesh = m;
@@ -59,7 +70,7 @@ public class DiscVertexShaper : MonoBehaviour
             currentAngle -= anglePerPoly;
         }
         //bottom face
-        vertices[detail + 2] = new Vector3(vertices[0].x, vertices[0].y - 3, vertices[0].z);
+        vertices[detail + 2] = new Vector3(vertices[0].x, vertices[0].y - thickness, vertices[0].z);
         vIndex = detail +3;
         pIndex = 0;
         currentAngle = 180;
@@ -67,7 +78,7 @@ public class DiscVertexShaper : MonoBehaviour
         for (int i = 0; i <= detail; i++)//for every triangle in the arc, loop around the angle till the final angle, the higher the detail variable, the higher the poly count, the smoother the circle
         {
             Vector3 vertex = Vector3.zero + GetVectorFromAngle(currentAngle+180) * length;
-            vertices[vIndex] = vertex + Vector3.down * ConstantValues.DISC_THICKNESS;
+            vertices[vIndex] = vertex + Vector3.down * thickness;
 
             if (i > 0)
             {

@@ -24,9 +24,9 @@ public class LevelManager : MonoBehaviour//holds the data of the levels, im maki
             CreateLevelData();
             Save();
         }
-          
-        
-        
+
+
+        NextLevel();
     }
     void CreateLevelData()
     {
