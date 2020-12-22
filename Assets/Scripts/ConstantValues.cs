@@ -14,6 +14,7 @@ public class ConstantValues //contains constants
     public const float POLE_LENGTH = DISC_SPACE;
     public const float POLE_ROTATION_SPEED = 10;
     public const float BALL_POINT_Y = 162;
+    
     public const int DISC_POLY_COUNT = 10;
     public const int DISC_OCCLUSION = 5;
     public const string DISC_MATERIAL_PATH = "Mats/Disc";

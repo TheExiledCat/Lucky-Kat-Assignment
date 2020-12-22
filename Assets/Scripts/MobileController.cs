@@ -35,7 +35,7 @@ public class MobileController : MonoBehaviour // controls the pole with mobile c
         {
             swipeDist = 0;
         }
-        transform.localEulerAngles+= Vector3.up * swipeDist*Time.deltaTime*10;
+        transform.localEulerAngles+= Vector3.up * swipeDist;
         transform.localEulerAngles += Vector3.up * Input.GetAxis("Horizontal")*Time.deltaTime*100;//for testing
     }
     void Disable()
