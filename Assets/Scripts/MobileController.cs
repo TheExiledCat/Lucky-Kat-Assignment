@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobileController : MonoBehaviour
+public class MobileController : MonoBehaviour // controls the pole with mobile controls or arrow keys on keyboard
 {
     [SerializeField] Vector2 startPos;
         float swipeDist;
@@ -35,7 +35,7 @@ public class MobileController : MonoBehaviour
         {
             swipeDist = 0;
         }
-        transform.localEulerAngles+= Vector3.up * swipeDist*Time.deltaTime;
+        transform.localEulerAngles+= Vector3.up * swipeDist*Time.deltaTime*10;
         transform.localEulerAngles += Vector3.up * Input.GetAxis("Horizontal")*Time.deltaTime*100;//for testing
     }
     void Disable()

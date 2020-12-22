@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class Disc 
+public class Disc //data class for the discs info
 {
     public float startRotation;
     public int amountOfSplits;

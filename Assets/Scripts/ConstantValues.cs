@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstantValues 
+public class ConstantValues //contains constants
 {
     public const float ROTATION_SPEED =10;
     public const float DISC_SPACE = 5;

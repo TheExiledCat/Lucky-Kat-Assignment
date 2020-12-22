@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(DiscRender))]
-public class DiscVertexShaper : MonoBehaviour
+public class DiscVertexShaper : MonoBehaviour //creates a custom Circle Fill mesh 
 {
     Vector3[] vertices;
     Vector2[] uv;

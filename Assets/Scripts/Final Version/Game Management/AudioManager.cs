@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour // plays audio
 {
     public static AudioManager AM = null;
     AudioSource source;

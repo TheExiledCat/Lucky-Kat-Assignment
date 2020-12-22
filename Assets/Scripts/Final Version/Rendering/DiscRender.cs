@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiscRender : MonoBehaviour
+public class DiscRender : MonoBehaviour //changes the color of the discs using the custom shader 
 {
     MaterialPropertyBlock m;
     Renderer r;

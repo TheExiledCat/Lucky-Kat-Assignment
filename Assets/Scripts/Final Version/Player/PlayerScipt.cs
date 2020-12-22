@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerScipt : MonoBehaviour
+public class PlayerScipt : MonoBehaviour // manages the player
 {
     Rigidbody rb;
     public event Action OnDeath;
@@ -37,8 +37,9 @@ public class PlayerScipt : MonoBehaviour
     }
     void Respawn()
     {
+        Disable();
         transform.position = initialPos;
-        Enable();
+        Invoke("Enable", 1.5f);
     }
     void Enable()
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bouncer : MonoBehaviour
+public class Bouncer : MonoBehaviour  // bounces the player
 {
     Rigidbody rb;
     public event Action OnBounce;

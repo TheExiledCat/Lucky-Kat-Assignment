@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour // handles UI with info gathered from the game manager
 {
 
     [SerializeField] TMP_Text score;
@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
         GameScript.GS.OnScore += SetScore;
         LevelGenerator.LG.OnLevelUp += SetLevel;
         GameScript.GS.OnDeath += ResetScore;
+        GameScript.GS.OnWin += ResetScore;
     }
 
     // Update is called once per frame

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiscSpawner : MonoBehaviour
+public class DiscSpawner : MonoBehaviour //Spawns the discs after the level generator hands the files over
 {
     [SerializeField]
     List<GameObject> loadedDiscs = new List<GameObject>();
     public event Action<List<GameObject>> SetDiscs;
     public event Action<List<GameObject>> OnSpawn;
-    public event Action OnGameOver;
     GameObject Pole;
     private void Start()
     {
@@ -17,14 +16,15 @@ public class DiscSpawner : MonoBehaviour
     }
     public void SpawnLevel(LevelData ld)
     {
-        if (ld == null)
-        {
-            OnGameOver?.Invoke();
-        }
+        
         Clear();
+        GenerateRenderer();
         GeneratePole(ld);
         GenerateDiscs(ld);
         SetDiscs?.Invoke(loadedDiscs); 
+    }
+    void GenerateRenderer() {
+        GameScript.GS.gameObject.AddComponent<DiscRenderProfile>();
     }
     void Clear()
     {

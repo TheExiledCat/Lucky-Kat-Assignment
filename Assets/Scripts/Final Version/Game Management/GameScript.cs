@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class GameScript : MonoBehaviour
+public class GameScript : MonoBehaviour // manages the gameplay and win conditions, singleton
 {
     public static GameScript GS;
     public event Action<int> OnScore;
@@ -27,10 +27,11 @@ public class GameScript : MonoBehaviour
         }
         player = GameObject.FindGameObjectWithTag(ConstantValues.PLAYER_TAG);
         player.GetComponent<Bouncer>().OnBounce += ResetCombo;
-        player.GetComponent<Bouncer>().OnBounce += AudioManager.AM.Bounce;
+        
     }
     private void Start()
     {
+        player.GetComponent<Bouncer>().OnBounce += AudioManager.AM.Bounce;
         OnStart?.Invoke();
     }
     public void SetTopDiscs(List<GameObject> l)
@@ -86,12 +87,17 @@ public class GameScript : MonoBehaviour
     void Win()
     {
         print("GG");
+        points = 0;
+        LevelGenerator.LG.CheckLevel();
         OnWin?.Invoke();
+        combo = 0;
         
     }
     public void OnGameEnd()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        Destroy(AudioManager.AM.gameObject);
+        Destroy(gameObject);
     }
     // Update is called once per frame
     void Update()

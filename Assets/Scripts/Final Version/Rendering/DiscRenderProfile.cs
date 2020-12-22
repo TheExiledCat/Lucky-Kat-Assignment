@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiscRenderProfile : MonoBehaviour
+public class DiscRenderProfile : MonoBehaviour // Occlusion clips the Discs so the performance is way better. Only renders a max of 'ContantValues.DISC_OCCLUSION'
 {
     int amountToRender = 5;
     List<GameObject> gameObjects ;
@@ -10,10 +10,11 @@ public class DiscRenderProfile : MonoBehaviour
     DiscSpawner ds;
     private void Awake()
     {
-        ds = GetComponent<DiscSpawner>();
-        ds.SetDiscs += SetGameObjects;
-        ds.OnSpawn += Initiate;
-       
+        
+            ds = GetComponent<DiscSpawner>();
+            ds.SetDiscs += SetGameObjects;
+            ds.OnSpawn += Initiate;
+        
     }
     public void Initiate(List<GameObject> _l)
     {
@@ -34,6 +35,7 @@ public class DiscRenderProfile : MonoBehaviour
         }
         return false;
     }
+    
     private void Disable()
     {
         for (int i = 0; i < amountToRender; i++)

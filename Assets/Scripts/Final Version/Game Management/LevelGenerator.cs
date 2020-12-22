@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class LevelGenerator : MonoBehaviour//holds the data of the levels, im making the first 3 levels of the game, which are all preprogrammed and hard coded.
+public class LevelGenerator : MonoBehaviour//singleton,holds the data of the levels, im making the first 3 levels of the game, which are all preprogrammed and hard coded.
 {
     int level = 0;
     [SerializeField] List<LevelData> levels;
     public event Action<List<LevelData>> OnSave;
     public event Action OnLoad;
     public event Action<int> OnLevelUp;
+    public event Action OnGameEnd;
     DiscSpawner ds;
     public static LevelGenerator LG = null;
     private void Awake()//initiates singleton
@@ -31,6 +32,10 @@ public class LevelGenerator : MonoBehaviour//holds the data of the levels, im ma
         GameScript.GS.OnStart += Initiate;
         GameScript.GS.OnWin += NextLevel;
         GameScript.GS.OnDeath += RestartLevel;
+        OnGameEnd += GameScript.GS.OnGameEnd;
+
+        OnGameEnd += GameScript.GS.OnGameEnd;
+       // GameScript.GS.OnWin += CheckLevel;
     }
     void RestartLevel()
     {
@@ -52,6 +57,13 @@ public class LevelGenerator : MonoBehaviour//holds the data of the levels, im ma
 
 
         NextLevel();
+    }
+    public void CheckLevel()
+    {
+        if (level > levels.Count)
+        {
+            OnGameEnd?.Invoke();
+        }
     }
     void CreateLevelData()//creates the leveldata, can be easily filled with levels or just randomness
     {
@@ -97,7 +109,19 @@ public class LevelGenerator : MonoBehaviour//holds the data of the levels, im ma
             levels[1].AddDisc(discToAdd);
         }
 
-        levels[0].AddDisc(new Disc(UnityEngine.Random.Range(0, 360), 0, 0));//EndDisc
+        levels[1].AddDisc(new Disc(UnityEngine.Random.Range(0, 360), 0, 0));//EndDisc
+        #endregion
+        #region level 3
+        levels.Add(new LevelData(new List<Disc>(), Color.green));
+
+        levels[2].AddDisc(new Disc(UnityEngine.Random.Range(0, 360), 1));
+        for (int i = 0; i < 19; i++)
+        {
+            Disc discToAdd = new Disc(UnityEngine.Random.Range(0, 360), (int)Mathf.Floor(UnityEngine.Random.Range(1,4)),3,0);
+            levels[2].AddDisc(discToAdd);
+        }
+
+        levels[2].AddDisc(new Disc(UnityEngine.Random.Range(0, 360), 0, 0));//EndDisc
         #endregion
     }
     void Load()//load from json
@@ -112,6 +136,7 @@ public class LevelGenerator : MonoBehaviour//holds the data of the levels, im ma
     void NextLevel()//generate the level
     {
         level++;
+        CheckLevel();
         ds.SpawnLevel(levels[level-1]);
         OnLevelUp?.Invoke(level);
     }
